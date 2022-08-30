@@ -1,0 +1,257 @@
+<section id="shortFall">
+    <div class="shortFall-title text-center mx-auto">
+        <h3 class="pt-2" style="color: rgb(43, 43, 43); font-style: 18px; font-weight: bold;">النواقص</h3>
+    </div>
+    <div class="my-3"></div>
+    <div class="parent-row" *ngIf="tuktuks.length > 0">
+        <h3 style="text-align: center;">نواقص التوكتوك</h3>
+        <div class="child-col w-100 mx-auto ">
+            <div class="table-responsive">
+                <table class="table  table-hover text-end">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">عمليات</th> -->
+                            <th scope="col">التاريخ</th>
+                            <!-- <th scope="col">التاجر</th> -->
+                            <th scope="col">رقم أو اسم الرف</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">الكود</th>
+                            <th scope="col">إسم الصنف</th>
+                            <th scope="col">باركود</th>
+                            <th scope="col">م</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tuktuk of tuktuks |  paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLenght } ; let i =index" style="cursor: pointer;">
+                            <!-- <td>
+                                <button class="btn btn-outline-danger" (click)="deleteTuktuk(tuktuk.tuktukId)"><i
+                    class="fa-solid fa-trash-can me-2"></i>مسح</button>
+                            </td> -->
+                            <td>{{ tuktuk.createdDate | date:'yyyy-MM-dd' }}</td>
+                            <!-- <td>{{ tuktuk.trader_name }}</td> -->
+                            <td>{{ tuktuk.shelf_name_or_number }}</td>
+                            <td>{{ tuktuk.amount }}</td>
+                            <td>{{ tuktuk.code }}</td>
+                            <td>{{ tuktuk.product_name }}</td>
+                            <td>{{ tuktuk.parcode }}</td>
+                            <th scope="row">{{ i+1 }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <pagination-controls class="text-center m-3" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+
+    </div>
+    <div class="my-3"></div>
+    <div class="parent-row" *ngIf="Paints.length > 0">
+        <h3 style="text-align: center;">نواقص الدهانات</h3>
+        <div class="child-col w-100 mx-auto ">
+            <div class="table-responsive">
+                <table class="table  table-hover text-end">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">عمليات</th> -->
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">التاجر</th>
+                            <th scope="col">رقم أو اسم الرف</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">الكود</th>
+                            <th scope="col">إسم الصنف</th>
+                            <th scope="col">باركود</th>
+                            <th scope="col">م</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Paints of Paints |  paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLenght } ; let i =index" style="cursor: pointer;">
+                            <td>
+                                <!-- <button class="btn btn-outline-danger" (click)="deletePaints(Paints.paintsId)"><i
+                    class="fa-solid fa-trash-can me-2"></i>مسح</button>
+                            </td> -->
+                                <td>{{ Paints.createdDate | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ Paints.trader_name }}</td>
+                                <td>{{ Paints.shelf_name_or_number }}</td>
+                                <td>{{ Paints.amount }}</td>
+                                <td>{{ Paints.code }}</td>
+                                <td>{{ Paints.product_name }}</td>
+                                <td>{{ Paints.parcode }}</td>
+                                <th scope="row">{{ i+1 }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <pagination-controls class="text-center m-3" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+
+    </div>
+    <div class="my-3"></div>
+    <div class="parent-row" *ngIf="Others.length > 0">
+        <h3 style="text-align: center;">نواقص الكماليات</h3>
+        <div class="child-col w-100 mx-auto ">
+            <div class="table-responsive">
+                <table class="table  table-hover text-end">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">عمليات</th> -->
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">التاجر</th>
+                            <th scope="col">رقم أو اسم الرف</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">الكود</th>
+                            <th scope="col">إسم الصنف</th>
+                            <th scope="col">باركود</th>
+                            <th scope="col">م</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Others of Others |  paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLenght } ; let i =index" style="cursor: pointer;">
+                            <!-- <td>
+                                <button class="btn btn-outline-danger" (click)="deleteOther(Others.otherId)"><i
+                    class="fa-solid fa-trash-can me-2"></i>مسح</button>
+                            </td> -->
+                            <td>{{ Others.createdDate | date:'yyyy-MM-dd' }}</td>
+                            <td>{{ Others.trader_name }}</td>
+                            <td>{{ Others.shelf_name_or_number }}</td>
+                            <td>{{ Others.amount }}</td>
+                            <td>{{ Others.code }}</td>
+                            <td>{{ Others.product_name }}</td>
+                            <td>{{ Others.parcode }}</td>
+                            <th scope="row">{{ i+1 }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <pagination-controls class="text-center m-3" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+
+    </div>
+    <div class="my-3"></div>
+    <div class="parent-row" *ngIf="Visbas.length > 0">
+        <h3 style="text-align: center;">نواقص الفيزبا</h3>
+        <div class="child-col w-100 mx-auto ">
+            <div class="table-responsive">
+                <table class="table  table-hover text-end">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">عمليات</th> -->
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">التاجر</th>
+                            <th scope="col">رقم أو اسم الرف</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">الكود</th>
+                            <th scope="col">إسم الصنف</th>
+                            <th scope="col">باركود</th>
+                            <th scope="col">م</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Visba of Visbas |  paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLenght } ; let i =index" style="cursor: pointer;">
+                            <td>
+                                <!-- <button class="btn btn-outline-danger" (click)="deleteVisba(Visba.visbaId)"><i
+                    class="fa-solid fa-trash-can me-2"></i>مسح</button>
+                            </td> -->
+                                <td>{{ Visba.createdDate | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ Visba.trader_name }}</td>
+                                <td>{{ Visba.shelf_name_or_number }}</td>
+                                <td>{{ Visba.amount }}</td>
+                                <td>{{ Visba.code }}</td>
+                                <td>{{ Visba.product_name }}</td>
+                                <td>{{ Visba.parcode }}</td>
+                                <th scope="row">{{ i+1 }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <pagination-controls class="text-center m-3" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+
+    </div>
+    <div class="my-3"></div>
+    <div class="parent-row" *ngIf="Torocycles.length > 0">
+        <h3 style="text-align: center;">نواقص التروسيكل</h3>
+        <div class="child-col w-100 mx-auto ">
+            <div class="table-responsive">
+                <table class="table  table-hover text-end">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">عمليات</th> -->
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">التاجر</th>
+                            <th scope="col">رقم أو اسم الرف</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">الكود</th>
+                            <th scope="col">إسم الصنف</th>
+                            <th scope="col">باركود</th>
+                            <th scope="col">م</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Torocycle of Torocycles |  paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLenght } ; let i =index" style="cursor: pointer;">
+                            <!-- <td>
+                                <button class="btn btn-outline-danger" (click)="deleteTorocycle(Torocycle.torocycleId)"><i
+                    class="fa-solid fa-trash-can me-2"></i>مسح</button>
+                            </td> -->
+                            <td>{{ Torocycle.createdDate | date:'yyyy-MM-dd' }}</td>
+                            <td>{{ Torocycle.trader_name }}</td>
+                            <td>{{ Torocycle.shelf_name_or_number }}</td>
+                            <td>{{ Torocycle.amount }}</td>
+                            <td>{{ Torocycle.code }}</td>
+                            <td>{{ Torocycle.product_name }}</td>
+                            <td>{{ Torocycle.parcode }}</td>
+                            <th scope="row">{{ i+1 }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <pagination-controls class="text-center m-3" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+
+    </div>
+    <div class="my-3"></div>
+    <div class="parent-row" *ngIf="Mototcycles.length > 0">
+        <h3 style="text-align: center;">نواقص الموتوسيكل</h3>
+        <div class="child-col w-100 mx-auto ">
+            <div class="table-responsive">
+                <table class="table  table-hover text-end">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">عمليات</th> -->
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">التاجر</th>
+                            <th scope="col">رقم أو اسم الرف</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">الكود</th>
+                            <th scope="col">إسم الصنف</th>
+                            <th scope="col">باركود</th>
+                            <th scope="col">م</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Motocycle of Mototcycles |  paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLenght } ; let i =index" style="cursor: pointer;">
+                            <!-- <td>
+                                <button class="btn btn-outline-danger" (click)="deleteMotocycle(Motocycle.mototcycleId)"><i
+                    class="fa-solid fa-trash-can me-2"></i>مسح</button>
+                            </td> -->
+                            <td>{{ Motocycle.createdDate | date:'yyyy-MM-dd' }}</td>
+                            <td>{{ Motocycle.trader_name }}</td>
+                            <td>{{ Motocycle.shelf_name_or_number }}</td>
+                            <td>{{ Motocycle.amount }}</td>
+                            <td>{{ Motocycle.code }}</td>
+                            <td>{{ Motocycle.product_name }}</td>
+                            <td>{{ Motocycle.parcode }}</td>
+                            <th scope="row">{{ i+1 }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <pagination-controls class="text-center m-3" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,38 @@
+<section id="bills">
+    <div class="bills-title text-center mx-auto">
+        <h3 class="pt-2" style="color: rgb(43, 43, 43); font-style: 18px; font-weight: bold;">الفواتير</h3>
+    </div>
+    <div class="parent-row">
+        <div class="child-col w-100 mx-auto">
+            <div class="table-responsive">
+                <table class="table  table-hover text-end">
+                    <thead>
+                        <tr>
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">سعر الفاتورة</th>
+                            <th scope="col">سعر البيع</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">العميل</th>
+                            <th scope="col">التاجر</th>
+                            <th scope="col">إسم الصنف</th>
+                            <th scope="col">م</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tuktuk of bills ; let i =index" style="cursor: pointer;">
+                            <td>{{ tuktuk.createdDate | date:'yyyy-MM-dd' }}
+                            </td>
+                            <td>{{ tuktuk.price }}</td>
+                            <td>{{ tuktuk.sell_price }}</td>
+                            <td>{{ tuktuk.quantity }}</td>
+                            <td>{{ tuktuk.receiverName }}</td>
+                            <td>{{ tuktuk.supplierName }}</td>
+                            <td>{{ tuktuk.productName }}</td>
+                            <th scope="row">{{ i+1 }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

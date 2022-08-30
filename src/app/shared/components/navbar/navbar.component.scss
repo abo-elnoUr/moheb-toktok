@@ -1,0 +1,49 @@
+* {
+    user-select: none;
+}
+
+.navbar-inverse {
+    background: rgba($color: #000000, $alpha: 0.4);
+    backdrop-filter: blur(3px);
+}
+
+.lang {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    // width: 15%;
+}
+
+nav ul li a {
+    font-size: 18px;
+}
+
+nav ul li a.active {
+    color: rgb(0, 0, 0) !important;
+    font-weight: 600;
+}
+
+nav ul li a:hover {
+    color: #000;
+}
+
+// media query
+@media screen and (max-width: 992px) {
+    .lang {
+        margin-top: 20px;
+        margin: 10px auto;
+    }
+    .lang span {
+        padding: 0 10px;
+    }
+    nav {
+        text-align: center;
+    }
+    .navbar-collapse {
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 930px) {}
+
+@media screen and (max-width: 615px) {}

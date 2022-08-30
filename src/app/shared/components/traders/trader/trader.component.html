@@ -1,0 +1,45 @@
+<section id="trader">
+    <div class="trader-title text-center mx-auto">
+        <h3 class="pt-2" style="color: rgb(43, 43, 43); font-style: 18px; font-weight: bold;">التاجر</h3>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 text-end">
+
+            </div>
+            <div class="col-md-6 text-end">
+                <label class="lead">إسم التاجر : <span class="required">{{supplierName}}</span></label>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 text-end">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive-lg">
+                    <table class="table  table-hover text-end">
+                        <thead>
+                            <tr>
+                                <th scope="col">الناريخ</th>
+                                <th scope="col">السعر</th>
+                                <th scope="col">سعر الشراء</th>
+                                <th scope="col">الكمية</th>
+                                <th span="6" scope="col">إسم الصنف</th>
+                                <th scope="col">م</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of products; let i=index">
+                                <td>{{item.createdDate | date:'yyyy-MM-dd' }}</td>
+                                <td>{{item.price}}</td>
+                                <td>{{item.buy_price}}</td>
+                                <td>{{item.newQuantity}}</td>
+                                <td>{{item.product_name}}</td>
+                                <th scope="row">{{ i + 1 }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

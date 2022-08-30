@@ -1,0 +1,52 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark navbar-inverse py-0">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="lang" style="cursor: pointer">
+                <a class="nav-link text-light" routerLink="dashboard" routerLinkActive="active"><i
+            class="fa-solid fa-fingerprint me-2"></i>لوحة
+          التحكم</a>
+            </div>
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-light" routerLink="short-falls" routerLinkActive="active">النواقص</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-light" routerLink="paints" routerLinkActive="active">البويات</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-light" routerLink="others" routerLinkActive="active">الكماليات</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-light" routerLink="visba" routerLinkActive="active">الفيسبا</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-light" routerLink="motocycle" routerLinkActive="active">الموتوسيكل</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-light" routerLink="torocycle" routerLinkActive="active">التروسيكل</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-light" routerLink="tuktuk" routerLinkActive="active">التوك توك</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-light" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">الرئيسية</a>
+                </li>
+            </ul>
+            <div class="me-2">
+                <button *ngIf="login" (click)="logout()" class="btn btn-outline-danger">
+          <i class="fas fa-sign-out-alt me-2" style="transform: translateY(0%);transform: rotateX(-180deg)"></i>تسجيل
+          الخروج
+        </button>
+                <button *ngIf="!login" routerLink="login" class="btn btn-outline-light">
+          <i class="fas fa-sign-out-alt me-2" style="transform: translateY(0%)"></i>تسجيل
+          الدخول
+        </button>
+            </div>
+        </div>
+        <a class="navbar-brand" routerLink="/"><img style="width: 50px" src="../../../../assets/images/logo.png" /></a>
+    </div>
+</nav>

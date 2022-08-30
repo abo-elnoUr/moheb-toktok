@@ -1,0 +1,202 @@
+<section id="torocycle">
+    <div class="torocycle-title text-center mx-auto">
+        <h3 class="pt-2" style="color: rgb(43, 43, 43); font-style: 18px; font-weight: bold;">التورسيكل</h3>
+    </div>
+    <div class="parent-row">
+        <div class="child-col">
+            <div class="text-center mx-auto my-3">
+                <div class="input-group mb-3">
+                    <button (click)="getTorocycle()" class="btn btn-outline-success"><i
+              class="fa-solid fa-magnifying-glass me-2"></i>بحث</button>
+                    <input type="text" class="form-control text-end" [ngbTypeahead]="search" (keyup.enter)="getTorocycle()" [(ngModel)]="searchValue" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                    <span class="input-group-text" id="inputGroup-sizing-default">إبحث
+            بالاسم او رقم الرف</span>
+                </div>
+            </div>
+        </div>
+        <div class="child-col w-100 mx-auto">
+            <div class="table-responsive">
+                <table class="table  table-hover text-end">
+                    <thead>
+                        <tr>
+                            <th scope="col">عمليات</th>
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">الصورة المصغرة</th>
+                            <!-- <th scope="col">التاجر</th> -->
+                            <th scope="col">رقم أو اسم الرف</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">السعر</th>
+                            <th scope="col">الكود</th>
+                            <th scope="col">إسم الصنف</th>
+                            <th scope="col">باركود</th>
+                            <th scope="col">م</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let torocycle of torocycles |  paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalLenght }; let i =index " style="cursor: pointer;" (click)="showImage(torocycle)">
+                            <td>
+                                <button class="btn btn-outline-primary" (click)="gettorocycleData(torocycle)" data-bs-toggle="modal" data-bs-target="#invoiceModal"><i class="fa-solid fa-cart-shopping me-2"></i>أضف إلي
+                  الفاتورة</button>
+                            </td>
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">{{ torocycle.createdDate | date:'yyyy-MM-dd' }}
+                            </td>
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <img class="img-fluid" style="width: 30px;" [src]="'data:Image/jpg;base64,' + torocycle.productPhoto" alt="{{'product Photo'}}">
+                            </td>
+                            <!-- <td data-bs-toggle="modal" data-bs-target="#exampleModal">{{ torocycle.trader_name }}</td> -->
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">{{ torocycle.shelf_name_or_number }}
+                            </td>
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">{{ torocycle.amount }}</td>
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">{{ torocycle.sell_price }}</td>
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">{{ torocycle.code }}</td>
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">{{ torocycle.product_name }}</td>
+                            <td data-bs-toggle="modal" data-bs-target="#exampleModal">{{ torocycle.parcode }}</td>
+                            <th scope="row" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ i+1 }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <pagination-controls class="text-center m-3" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Modal Image View -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title ms-auto" id="staticBackdropLabel"><i class="fa-solid fa-image"></i></h5>
+            </div>
+            <div class="modal-body text-end">
+                <img class="img-fluid" [src]="'data:Image/jpg;base64,' + torocycleData.productPhoto" alt="{{'building Photo'}}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i
+            class="fa-solid fa-xmark me-2"></i>اغلاق</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal invoice -->
+<div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title ms-auto" id="staticBackdropLabel"><i class="fa-solid fa-cart-shopping"></i></h5>
+            </div>
+            <div class="modal-body text-end">
+                <div class="container mt-4">
+                    <div class="text-center">
+                        <h4>بيانات العميل</h4>
+                    </div>
+                    <form class="row" [formGroup]="clientForm">
+                        <div class="col-md-6 text-end">
+                            <div class="input-group mb-3">
+                                <input formControlName="phoneNumber" type="text" class="form-control">
+                                <label class="lead input-group-text"> : الموبايل </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <div class="input-group mb-3">
+                                <input formControlName="recieverName" [ngbTypeahead]="searchClientName" type="text" class="form-control">
+                                <label class="lead input-group-text"> : إسم العميل </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6 text-end">
+                            <div class="input-group mb-3">
+                                <input formControlName="address" type="text" class="form-control">
+                                <label class="lead input-group-text"> : العنوان </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-center">
+                    <h4>الفاتورة</h4>
+                </div>
+                <div class="table-responsive-sm">
+                    <table class="table  table-hover text-end  mx-auto">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    عمليات
+                                </th>
+                                <th scope="col">الباركود</th>
+                                <th scope="col">الكمية</th>
+                                <th scope="col">سعر البيع</th>
+                                <th scope="col">الكود</th>
+                                <th scope="col">اسم الصنف</th>
+                                <th scope="col">م</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let productsBill of productsBill; let i = index">
+                                <td>
+                                    <button class="btn btn-outline-danger" type="button" (click)="deleteRow(i)"><i
+                      class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" placeholder="الباركود" [(ngModel)]="productsBill.parcode" type="text" name="{{productsBill.parcode}}" />
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <span style="cursor: pointer;" class="input-group-text text-danger" id="inputGroup-sizing-default"><i class="fa-solid fa-circle-minus"></i></span>
+                                        <input class="table-cell text-end form-control" placeholder="الكمية" [(ngModel)]="productsBill.amount" type="number" name="{{productsBill.amount}}" />
+                                        <span style="cursor: pointer;" class="input-group-text text-primary" id="inputGroup-sizing-default"><i class="fa-solid fa-circle-plus"></i></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" placeholder="سعر البيع" [(ngModel)]="productsBill.sell_price" type="number" name="{{productsBill.sell_price}}" />
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" placeholder="الكود" [(ngModel)]="productsBill.code" type="text" name="{{productsBill.code}}" />
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" placeholder="إسم الصنف" [(ngModel)]="productsBill.product_name" type="text" name="{{productsBill.product_name}}" />
+                                </td>
+                                <td class="text-center" scope="col">{{ i+1 }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-outline-primary" type="button" (click)="addRow()"><i
+                      class="fa-solid fa-plus"></i></button>
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" type="number" [(ngModel)]="newProductsBill.parcode" name="parcode" />
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" type="number" [(ngModel)]="newProductsBill.amount" name="amount" />
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" type="number" [(ngModel)]="newProductsBill.sell_price" name="sell_price" />
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" type="number" [(ngModel)]="newProductsBill.code" name="code" />
+                                </td>
+                                <td>
+                                    <input class="table-cell text-end form-control" type="text" [ngbTypeahead]="search" (keyup)="getNewtorocycle($event)" [(ngModel)]="newProductsBill.product_name" name="product_name" />
+                                </td>
+                                <td class="text-center mx-auto">...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center mx-auto">
+                        <button class="btn btn-outline-primary" (click)="addBill()"><i
+                class="fa-solid fa-file-invoice me-2"></i>صرف</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i
+            class="fa-solid fa-xmark me-2"></i>اغلاق</button>
+            </div>
+        </div>
+    </div>
+</div>

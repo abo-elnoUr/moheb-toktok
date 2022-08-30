@@ -1,0 +1,141 @@
+<section id="client">
+    <div class="client-title text-center mx-auto">
+        <h3 class="pt-2" style="color: rgb(43, 43, 43); font-style: 18px; font-weight: bold">
+            إذن صرف بضاعة
+        </h3>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 text-end">
+                <label class="lead">الموبايل :
+          <span class="required">{{ reciever.phoneNumber }}</span></label
+        >
+      </div>
+      <div class="col-md-6 text-end">
+        <label class="lead"
+          >إسم العميل :
+          <span class="required">{{ reciever.recieverName }}</span></label
+        >
+      </div>
+      <div class="col-md-6 text-end">
+        <label class="lead">
+          العنوان : <span class="required">{{ reciever.address }}</span></label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="container mt-3 text-end">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive-lg">
+          <table class="table table-hover text-end">
+            <thead>
+              <tr>
+                <th scope="col">التاريخ</th>
+                <th scope="col">السعر</th>
+                <th scope="col">القيمة</th>
+                <th scope="col">الكمية</th>
+                <th span="6" scope="col">إسم الصنف</th>
+                <th scope="col">الكود</th>
+                <th scope="col">م</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of products; let i = index">
+                <td>{{ item.createdDate | date: "yyyy-MM-dd" }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.sell_price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.productName }}</td>
+                <td>{{ item.code }}</td>
+                <th scope="row">{{ i + 1 }}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h3 class="mx-auto text-center my-2 pb-2">دفع جزء من المبلغ</h3>
+      <div class="col-4"></div>
+      <div class="col-4">
+        <div class="input-group mb-3">
+          <input
+            type="number"
+            [(ngModel)]="paidValue"
+            class="form-control text-end"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+          />
+          <span class="input-group-text" id="inputGroup-sizing-default"
+            >الفلوس</span
+          >
+        </div>
+        <button class="btn btn-outline-primary" (click)="payDeptBank()">
+          <i class="fa-solid fa-cash-register me-2"></i>دفع
+        </button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <div class="table-responsive-lg">
+          <table class="table table-hover text-end">
+            <thead>
+              <tr>
+                <th scope="col">التاريخ</th>
+                <th scope="col">اخر مبلغ مدفوع</th>
+                <th scope="col">الباقي</th>
+                <th scope="col">المدفوع</th>
+                <th scope="col">الاجمالي</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{recieverBank.createdDate | date:'yyyy-MM-dd'}}</td>
+                <td>{{recieverBank.paid}}</td>
+                <!-- <td *ngIf="paidValue > 0">{{recieverBank.price - (recieverBank.totalPaid + paidValue)}}</td> -->
+                <td>{{recieverBank.price - recieverBank.totalPaid}}</td>
+                <!-- <td *ngIf="paidValue > 0">{{recieverBank.totalPaid + paidValue}}</td> -->
+                <td>{{recieverBank.totalPaid}}</td>
+                <td>{{recieverBank.price}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container mt-3 text-end">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive-lg">
+          <table class="table  table-hover text-end">
+            <thead>
+              <tr>
+                <th scope="col">المتبقي</th>
+                <th scope="col">المدفوع</th>
+                <th scope="col">إجمالي الفاتورة</th>
+                <th scope="col">ديون سابقة</th>
+                <th scope="col">الفاتورة الحالية</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>{{ '500' }}</td>
+                <td>{{ '700' }}</td>
+                <td>{{ '1200' }}</td>
+                <td>{{ '200' }}</td>
+                <td>{{ '1000' }}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</section>

@@ -1,0 +1,11 @@
+#traders {
+    margin: 60px auto;
+}
+
+.parent-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}

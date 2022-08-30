@@ -1,0 +1,1946 @@
+<section id="home-cards">
+    <div class="dashboard-title text-center">
+        <h3><i class="fa-solid fa-screwdriver-wrench me-2"></i>لوحة التحكم</h3>
+    </div>
+    <div class="row-parent">
+        <div class="col-child">
+            <div data-bs-toggle="modal" data-bs-target="#Modal-1_visba" class="text">
+                <a class="text-center m-0"><i class="fa-solid fa-gears me-2"></i>الفيسبا</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div
+        data-bs-toggle="modal"
+        data-bs-target="#Modal-1_torocycle"
+        class="text"
+      >
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-gears me-2"></i>التروسيكل</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div data-bs-toggle="modal" data-bs-target="#Modal-1_tuktuk" class="text">
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-gears me-2"></i>التوك توك</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div data-bs-toggle="modal" data-bs-target="#Modal-1_paint" class="text">
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-gears me-2"></i>البويات</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div data-bs-toggle="modal" data-bs-target="#Modal-1_other" class="text">
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-gears me-2"></i>الكماليات</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div
+        data-bs-toggle="modal"
+        data-bs-target="#Modal-1_motocycle"
+        class="text"
+      >
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-gears me-2"></i>الموتوسيكل</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div routerLink="../clients" class="text">
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-users me-2"></i>العملاء</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div routerLink="../traders" class="text">
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-truck-moving me-2"></i>التجار</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div routerLink="../bills" class="text">
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-file-invoice me-2"></i>الفواتير</a
+        >
+      </div>
+    </div>
+    <div class="col-child">
+      <div data-bs-toggle="modal" data-bs-target="#addBill" class="text">
+        <a class="text-center m-0"
+          ><i class="fa-solid fa-diagram-predecessor me-2"></i>إدخال فاتورة</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal-1_tuktuk -->
+<div
+  class="modal fade"
+  id="Modal-1_tuktuk"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <div class="text-center mb-3 mx-4">
+          <h4>التكتوك</h4>
+          <div>
+            <input
+              type="text"
+              [ngbTypeahead]="searchTuktuk"
+              (keyup)="onSearchTuktukChange($event)"
+              placeholder="ابحث "
+              class="form-control text-end"
+            />
+          </div>
+        </div>
+        <div class="text-end mb-3 mx-4">
+          <ul class="list p-0">
+            <li class="list-item">
+              <div class="list-item__image" *ngIf="tuktuk.productPhoto">
+                <img
+                  class="img-fluid"
+                  [src]="'data:Image/jpg;base64,' + tuktuk.productPhoto"
+                  alt="{{ 'tuktuk Photo' }}"
+                />
+              </div>
+              <div class="list-item__content">
+                <h4>{{ tuktuk.product_name }} : إسم المنتج</h4>
+                <p>{{ tuktuk.code }} : الكود</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="button-group text-center mx-auto text-end">
+          <button
+            *ngIf="tuktuk.tuktukId"
+            (click)="deleteTuktuk(tuktuk.tuktukId)"
+            class="btn btn-outline-danger mx-4"
+          >
+            <i class="fa-solid fa-trash-can me-2"></i>مسح
+          </button>
+          <button
+            *ngIf="tuktuk.tuktukId"
+            class="btn btn-outline-info mx-4"
+            (click)="changeTuktukMode(true); getTuktuk(tuktuk)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_tuktuk"
+          >
+            <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+          </button>
+          <button
+            class="btn btn-outline-primary mx-4"
+            *ngIf="!tuktuk.tuktukId"
+            (click)="changeTuktukMode(false)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_tuktuk"
+          >
+            <i class="fa-solid fa-plus me-2"></i>إضافة
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-2_tuktuk -->
+<div
+  class="modal fade"
+  id="Modal-2_tuktuk"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <a
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#Modal-1_tuktuk"
+          class="ms-5 arrow-back"
+          ><i class="fa-solid fa-chevron-left"></i
+        ></a>
+                <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+                    <i class="fa-solid fa-gear"></i>
+                </h5>
+            </div>
+            <div class="modal-body text-end">
+                <form [formGroup]="tuktukForm">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control text-end" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" formControlName="product_name" />
+                        <span class="input-group-text" id="inputGroup-sizing-default">اسم الصنف</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="code"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكود</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="buy_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر الشراء</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="sell_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر البيع</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="amount"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكمية</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="shelf_name_or_number"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم او رقم الرف</span
+            >
+          </div>
+          <div class="input-group mb-3" *ngIf="!tuktuk.tuktukId">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="trader_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم التاجر</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="file"
+              accept="image/*"
+              style="height: 100%"
+              (change)="onSelectTuktukFile($event)"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+            <img
+              *ngIf="tuktuk.tuktukId"
+              class="img-fluid"
+              width="100px"
+              height="100px"
+              [src]="'data:Image/jpg;base64,' + tuktuk.productPhoto"
+              alt="{{ 'tuktuk Photo' }}"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الصوره المصغره</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="parcode"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الباركود</span
+            >
+          </div>
+          <div class="button-group-2">
+            <button
+              *ngIf="tuktuk.tuktukId"
+              (click)="updateTuktuk(tuktukForm)"
+              [disabled]="!tuktukForm.valid"
+              class="btn btn-outline-info mx-4"
+            >
+              <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+            </button>
+            <button
+              *ngIf="!tuktuk.tuktukId"
+              (click)="saveTuktuk(tuktukForm)"
+              [disabled]="!tuktukForm.valid"
+              class="btn btn-outline-primary mx-4"
+            >
+              <i class="fa-solid fa-plus me-2"></i>إضافة
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-1_motocycle -->
+<div
+  class="modal fade"
+  id="Modal-1_motocycle"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <div class="text-center mb-3 mx-4">
+          <h4>موتوسيكل</h4>
+          <div>
+            <input
+              type="text"
+              [ngbTypeahead]="searchMotocycle"
+              (keyup)="onSearchMotocycleChange($event)"
+              placeholder="ابحث "
+              class="form-control text-end"
+            />
+          </div>
+        </div>
+        <div class="text-end mb-3 mx-4">
+          <ul class="list p-0">
+            <li class="list-item">
+              <div class="list-item__image">
+                <img
+                  class="img-fluid"
+                  [src]="'data:Image/jpg;base64,' + motocycle.productPhoto"
+                  alt="{{ 'motocycle Photo' }}"
+                />
+              </div>
+              <div class="list-item__content">
+                <h4>: إسم المنتج {{ motocycle.product_name }}</h4>
+                <p>{{ motocycle.code }}: الكود</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="button-group text-center mx-auto text-end">
+          <button
+            *ngIf="motocycle.mototcycleId"
+            (click)="deleteMotocycle(motocycle.mototcycleId)"
+            class="btn btn-outline-danger mx-4"
+          >
+            <i class="fa-solid fa-trash-can me-2"></i>مسح
+          </button>
+          <button
+            *ngIf="motocycle.mototcycleId"
+            class="btn btn-outline-info mx-4"
+            (click)="changeMotocycleMode(true); getMotocycle(motocycle)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_motocycle"
+          >
+            <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+          </button>
+          <button
+            class="btn btn-outline-primary mx-4"
+            *ngIf="!motocycle.mototcycleId"
+            (click)="changeMotocycleMode(false)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_motocycle"
+          >
+            <i class="fa-solid fa-plus me-2"></i>إضافة
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal_2 motocycle -->
+<div
+  class="modal fade"
+  id="Modal-2_motocycle"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <a
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#Modal-1_motocycle"
+          class="ms-5 arrow-back"
+          ><i class="fa-solid fa-chevron-left"></i
+        ></a>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <form [formGroup]="motocycleForm">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="product_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم الصنف</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="code"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكود</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="buy_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر الشراء</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="sell_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر البيع</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="amount"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكمية</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="shelf_name_or_number"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم او رقم الرف</span
+            >
+          </div>
+          <div class="input-group mb-3" *ngIf="!motocycle.mototcycleId">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="trader_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم التاجر</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="file"
+              accept="image/*"
+              style="height: 100%"
+              (change)="onSelectMotocycleFile($event)"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الصوره المصغره</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="parcode"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الباركود</span
+            >
+          </div>
+          <div class="button-group-2">
+            <button
+              *ngIf="motocycle.mototcycleId"
+              [disabled]="!motocycleForm.valid"
+              (click)="updateMotocycle(motocycleForm)"
+              class="btn btn-outline-info mx-4"
+            >
+              <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+            </button>
+            <button
+              *ngIf="!motocycle.mototcycleId"
+              [disabled]="!motocycleForm.valid"
+              (click)="saveMotocycle(motocycleForm)"
+              class="btn btn-outline-primary mx-4"
+            >
+              <i class="fa-solid fa-plus me-2"></i>إضافة
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-1_torocycle -->
+<div
+  class="modal fade"
+  id="Modal-1_torocycle"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <div class="text-center mb-3 mx-4">
+          <h4>التروسيكل</h4>
+          <div>
+            <input
+              type="text"
+              [ngbTypeahead]="searchTotocycls"
+              (keyup)="onSearchTorocycleChange($event)"
+              placeholder="ابحث "
+              class="form-control text-end"
+            />
+          </div>
+        </div>
+        <div class="text-end mb-3 mx-4">
+          <ul class="list p-0">
+            <li class="list-item">
+              <div class="list-item__image">
+                <img
+                  class="img-fluid"
+                  [src]="'data:Image/jpg;base64,' + torocycle.productPhoto"
+                  alt="{{ 'torocycle Photo' }}"
+                />
+              </div>
+              <div class="list-item__content">
+                <h4>: إسم المنتج {{ torocycle.product_name }}</h4>
+                <p>{{ torocycle.code }}: الكود</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="button-group text-center mx-auto text-end">
+          <button
+            *ngIf="torocycle.torocycleId"
+            (click)="deleteTorocycle(torocycle.torocycleId)"
+            class="btn btn-outline-danger mx-4"
+          >
+            <i class="fa-solid fa-trash-can me-2"></i>مسح
+          </button>
+          <button
+            *ngIf="torocycle.torocycleId"
+            class="btn btn-outline-info mx-4"
+            (click)="changeTorocycleMode(true); getTorocycle(torocycle)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_torocycle"
+          >
+            <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+          </button>
+          <button
+            class="btn btn-outline-primary mx-4"
+            *ngIf="!torocycle.torocycleId"
+            (click)="changeTorocycleMode(false)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_torocycle"
+          >
+            <i class="fa-solid fa-plus me-2"></i>إضافة
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-2_torocycle -->
+<div
+  class="modal fade"
+  id="Modal-2_torocycle"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <a
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#Modal-1_torocycle"
+          class="ms-5 arrow-back"
+          ><i class="fa-solid fa-chevron-left"></i
+        ></a>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <form [formGroup]="torocycleForm">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="product_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم الصنف</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="code"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكود</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="buy_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر الشراء</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="sell_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر البيع</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="amount"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكمية</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="shelf_name_or_number"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم او رقم الرف</span
+            >
+          </div>
+          <div class="input-group mb-3" *ngIf="!torocycle.torocycleId">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="trader_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم التاجر</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="file"
+              accept="image/*"
+              style="height: 100%"
+              (change)="onSelectTorocycleFile($event)"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الصوره المصغره</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="parcode"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الباركود</span
+            >
+          </div>
+          <div class="button-group-2">
+            <button
+              *ngIf="torocycle.torocycleId"
+              [disabled]="!torocycleForm.valid"
+              (click)="updateTorocycle(torocycleForm)"
+              class="btn btn-outline-info mx-4"
+            >
+              <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+            </button>
+            <button
+              *ngIf="!torocycle.torocycleId"
+              [disabled]="!torocycleForm.valid"
+              (click)="saveTorocycle(torocycleForm)"
+              class="btn btn-outline-primary mx-4"
+            >
+              <i class="fa-solid fa-plus me-2"></i>إضافة
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-1_visba -->
+<div
+  class="modal fade"
+  id="Modal-1_visba"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <div class="text-center mb-3 mx-4">
+          <h4>الفيسبا</h4>
+          <div>
+            <input
+              type="text"
+              [ngbTypeahead]="searchVisba"
+              (keyup)="onSearchVisbaChange($event)"
+              placeholder="ابحث "
+              class="form-control text-end"
+            />
+          </div>
+        </div>
+        <div class="text-end mb-3 mx-4">
+          <ul class="list p-0">
+            <li class="list-item">
+              <div class="list-item__image">
+                <img
+                  class="img-fluid"
+                  *ngIf="visba.productPhoto"
+                  [src]="'data:Image/jpg;base64,' + visba.productPhoto"
+                  alt="{{ 'visba Photo' }}"
+                />
+              </div>
+              <div class="list-item__content">
+                <h4>{{ visba.product_name }} : إسم المنتج</h4>
+                <p>{{ visba.code }}: الكود</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="button-group text-center mx-auto text-end">
+          <button
+            *ngIf="visba.visbaId"
+            (click)="deleteVisba(visba.visbaId)"
+            class="btn btn-outline-danger mx-4"
+          >
+            <i class="fa-solid fa-trash-can me-2"></i>مسح
+          </button>
+          <button
+            *ngIf="visba.visbaId"
+            class="btn btn-outline-info mx-4"
+            (click)="changeVisbaMode(true); getVisba(visba)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_visba"
+          >
+            <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+          </button>
+          <button
+            class="btn btn-outline-primary mx-4"
+            *ngIf="!visba.visbaId"
+            (click)="changeVisbaMode(false)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_visba"
+          >
+            <i class="fa-solid fa-plus me-2"></i>إضافة
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-2_visba -->
+<div
+  class="modal fade"
+  id="Modal-2_visba"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <a
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#Modal-1_visba"
+          class="ms-5 arrow-back"
+          ><i class="fa-solid fa-chevron-left"></i
+        ></a>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <form [formGroup]="visbaForm">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="product_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم الصنف</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="code"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكود</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="buy_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر الشراء</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="sell_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر البيع</span
+            >
+          </div>
+          <div class="input-group mb-3" >
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="amount"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكمية</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="shelf_name_or_number"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم او رقم الرف</span
+            >
+          </div>
+          <div class="input-group mb-3" *ngIf="!visba.visbaId">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="trader_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم التاجر</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="file"
+              accept="image/*"
+              style="height: 100%"
+              (change)="onSelectVisbaFile($event)"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الصوره المصغره</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="parcode"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الباركود</span
+            >
+          </div>
+          <div class="button-group-2">
+            <button
+              *ngIf="visba.visbaId"
+              [disabled]="!visbaForm.valid"
+              (click)="updateVisba(visbaForm)"
+              class="btn btn-outline-info mx-4"
+            >
+              <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+            </button>
+            <button
+              *ngIf="!visba.visbaId"
+              [disabled]="!visbaForm.valid"
+              (click)="saveVisba(visbaForm)"
+              class="btn btn-outline-primary mx-4"
+            >
+              <i class="fa-solid fa-plus me-2"></i>إضافة
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-1_other -->
+<div
+  class="modal fade"
+  id="Modal-1_other"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <div class="text-center mb-3 mx-4">
+          <h4>الكماليات</h4>
+          <div>
+            <input
+              type="text"
+              [ngbTypeahead]="searchOther"
+              (keyup)="onSearchOtherChange($event)"
+              placeholder="ابحث "
+              class="form-control text-end"
+            />
+          </div>
+        </div>
+        <div class="text-end mb-3 mx-4">
+          <ul class="list p-0">
+            <li class="list-item">
+              <div class="list-item__image">
+                <img
+                  class="img-fluid"
+                  [src]="'data:Image/jpg;base64,' + other.productPhoto"
+                  alt="{{ 'other Photo' }}"
+                />
+              </div>
+              <div class="list-item__content">
+                <h4>: إسم المنتج {{ other.product_name }}</h4>
+                <p>{{ other.code }}: الكود</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="button-group text-center mx-auto text-end">
+          <button
+            *ngIf="other.otherId"
+            (click)="deleteOther(other.otherId)"
+            class="btn btn-outline-danger mx-4"
+          >
+            <i class="fa-solid fa-trash-can me-2"></i>مسح
+          </button>
+          <button
+            *ngIf="other.otherId"
+            class="btn btn-outline-info mx-4"
+            (click)="changeOtherMode(true); getOther(other)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_other"
+          >
+            <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+          </button>
+          <button
+            class="btn btn-outline-primary mx-4"
+            *ngIf="!other.otherId"
+            (click)="changeOtherMode(false)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_other"
+          >
+            <i class="fa-solid fa-plus me-2"></i>إضافة
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-2_other -->
+<div
+  class="modal fade"
+  id="Modal-2_other"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <a
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#Modal-1_other"
+          class="ms-5 arrow-back"
+          ><i class="fa-solid fa-chevron-left"></i
+        ></a>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <form [formGroup]="otherForm">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="product_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم الصنف</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="code"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكود</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="buy_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر الشراء</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="sell_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر البيع</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="amount"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكمية</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="shelf_name_or_number"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم او رقم الرف</span
+            >
+          </div>
+          <div class="input-group mb-3" *ngIf="!other.otherId">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="trader_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم التاجر</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="file"
+              accept="image/*"
+              style="height: 100%"
+              (change)="onSelectOtherFile($event)"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الصوره المصغره</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="parcode"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الباركود</span
+            >
+          </div>
+          <div class="button-group-2">
+            <button
+              *ngIf="other.otherId"
+              [disabled]="!otherForm.valid"
+              (click)="updateOther(otherForm)"
+              class="btn btn-outline-info mx-4"
+            >
+              <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+            </button>
+            <button
+              *ngIf="!other.otherId"
+              [disabled]="!otherForm.valid"
+              (click)="saveOther(otherForm)"
+              class="btn btn-outline-primary mx-4"
+            >
+              <i class="fa-solid fa-plus me-2"></i>إضافة
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-1_paint -->
+<div
+  class="modal fade"
+  id="Modal-1_paint"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <div class="text-center mb-3 mx-4">
+          <h4>البويات</h4>
+          <div>
+            <input
+              type="text"
+              [ngbTypeahead]="searchPaints"
+              (keyup)="onSearchPaintChange($event)"
+              placeholder="ابحث "
+              class="form-control text-end"
+            />
+          </div>
+        </div>
+        <div class="text-end mb-3 mx-4">
+          <ul class="list p-0">
+            <li class="list-item">
+              <div class="list-item__image">
+                <img
+                  class="img-fluid"
+                  [src]="'data:Image/jpg;base64,' + paint.productPhoto"
+                  alt="{{ 'paint Photo' }}"
+                />
+              </div>
+              <div class="list-item__content">
+                <h4>: إسم المنتج {{ paint.product_name }}</h4>
+                <p>{{ paint.code }}: الكود</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="button-group text-center mx-auto text-end">
+          <button
+            *ngIf="paint.paintsId"
+            (click)="deletePaint(paint.paintsId)"
+            class="btn btn-outline-danger mx-4"
+          >
+            <i class="fa-solid fa-trash-can me-2"></i>مسح
+          </button>
+          <button
+            *ngIf="paint.paintsId"
+            class="btn btn-outline-info mx-4"
+            (click)="changePaintMode(true); getPaint(paint)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_paint"
+          >
+            <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+          </button>
+          <button
+            class="btn btn-outline-primary mx-4"
+            *ngIf="!paint.paintsId"
+            (click)="changePaintMode(false)"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal-2_paint"
+          >
+            <i class="fa-solid fa-plus me-2"></i>إضافة
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal-2_paint -->
+<div
+  class="modal fade"
+  id="Modal-2_paint"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <a
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#Modal-1_paint"
+          class="ms-5 arrow-back"
+          ><i class="fa-solid fa-chevron-left"></i
+        ></a>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          <i class="fa-solid fa-gear"></i>
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <form [formGroup]="paintForm">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="product_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم الصنف</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="code"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكود</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="buy_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر الشراء</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="sell_price"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >سعر البيع</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="amount"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الكمية</span
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="shelf_name_or_number"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم او رقم الرف</span
+            >
+          </div>
+          <div class="input-group mb-3" *ngIf="!paint.paintsId">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="trader_name"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >اسم التاجر</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="file"
+              accept="image/*"
+              style="height: 100%"
+              (change)="onSelectPaintFile($event)"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الصوره المصغره</span
+            >
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="parcode"
+            />
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >الباركود</span
+            >
+          </div>
+          <div class="button-group-2">
+            <button
+              *ngIf="paint.paintsId"
+              [disabled]="!paintForm.valid"
+              (click)="updatePaint(paintForm)"
+              class="btn btn-outline-info mx-4"
+            >
+              <i class="fa-solid fa-pen-to-square me-2"></i>تعديل
+            </button>
+            <button
+              *ngIf="!paint.paintsId"
+              [disabled]="!paintForm.valid"
+              (click)="savePaint(paintForm)"
+              class="btn btn-outline-primary mx-4"
+            >
+              <i class="fa-solid fa-plus me-2"></i>إضافة
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          <i class="fa-solid fa-xmark me-2"></i>اغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- add bill -->
+<div
+  class="modal fade"
+  id="addBill"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close ms-0"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <a
+          type="button"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          class="ms-5 arrow-back"
+          ><i class="fa-solid fa-chevron-left"></i
+        ></a>
+        <h5 class="modal-title ms-auto" id="staticBackdropLabel">
+          إدخال فاتورة
+        </h5>
+      </div>
+      <div class="modal-body text-end">
+        <div class="table-responsive">
+          <table class="table table-hover text-end w-75 mx-auto">
+            <thead>
+              <tr>
+                <th scope="col">عمليات</th>
+                <th scope="col">الباركود</th>
+                <!-- <th scope="col">الصورة المصغرة</th> -->
+                <th scope="col">إسم التاجر</th>
+                <th scope="col">الرف</th>
+                <th scope="col">الكمية</th>
+                <th scope="col">سعر البيع</th>
+                <th scope="col">سعر الشراء</th>
+                <th scope="col">الكود</th>
+                <th scope="col">اسم الصنف</th>
+                <th scope="col">م</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let productBill of productsBill; let i = index">
+                <td>
+                  <button
+                    class="btn btn-outline-danger"
+                    type="button"
+                    (click)="deleteRow(i)"
+                  >
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    placeholder="الباركود"
+                    [(ngModel)]="productBill.parcode"
+                    type="text"
+                    name="{{ productBill.parcode }}"
+                  />
+                </td>
+                <!-- <td>
+                  <input class="table-cell text-end form-control" placeholder="الصورة المصغرة"
+                    [(ngModel)]="productBill.photo" type="file" accept="image/*" style="height: 100%;"
+                    (change)="onSelectPaintFile($event)" name="{{productBill.photo}}" />
+                </td> -->
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    placeholder="التاجر"
+                    [(ngModel)]="productBill.trader_name"
+                    type="text"
+                    name="{{ productBill.trader_name }}"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    placeholder="الرف"
+                    [(ngModel)]="productBill.shelf_name_or_number"
+                    type="text"
+                    name="{{ productBill.shelf_name_or_number }}"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    placeholder="الكمية"
+                    [(ngModel)]="productBill.amount"
+                    type="number"
+                    name="{{ productBill.amount }}"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    placeholder="سعر البيع"
+                    [(ngModel)]="productBill.sell_price"
+                    type="number"
+                    name="{{ productBill.sell_price }}"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    placeholder="سعر الشراء"
+                    [(ngModel)]="productBill.buy_price"
+                    type="number"
+                    name="{{ productBill.buy_price }}"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    placeholder="الكود"
+                    [(ngModel)]="productBill.code"
+                    type="text"
+                    name="{{ productBill.code }}"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    placeholder="إسم الصنف"
+                    [(ngModel)]="productBill.product_name"
+                    type="text"
+                    name="{{ productBill.product_name }}"
+                  />
+                </td>
+                <td class="text-center" scope="col">{{ i + 1 }}</td>
+              </tr>
+              <tr>
+                <td>
+                  <button
+                    class="btn btn-outline-primary"
+                    type="button"
+                    (click)="addRow()"
+                  >
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    type="number"
+                    [(ngModel)]="newProductsBill.parcode"
+                    name="parcode"
+                  />
+                </td>
+                <!-- <td>
+                  <input class="table-cell text-end form-control" type="file" [(ngModel)]="newProductsBill.photo"
+                    name="photo" />
+                </td> -->
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    type="text"
+                    [(ngModel)]="newProductsBill.trader_name"
+                    name="trader"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    type="number"
+                    [(ngModel)]="newProductsBill.shelf_name_or_number"
+                    name="shelf_name_or_number"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    type="number"
+                    [(ngModel)]="newProductsBill.amount"
+                    name="amount"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    type="text"
+                    [(ngModel)]="newProductsBill.sell_price"
+                    name="sell_price"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    type="number"
+                    [(ngModel)]="newProductsBill.buy_price"
+                    name="buy_price"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    type="number"
+                    [(ngModel)]="newProductsBill.code"
+                    name="code"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="table-cell text-end form-control"
+                    type="text"
+                    [(ngModel)]="newProductsBill.product_name"
+                    name="product_name"
+                  />
+                </td>
+                <td class="text-center mx-auto">...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center w-25 mx-auto my-3">
+          <div class="input-group mb-3">
+            <select
+              class="form-select text-end"
+              id="inputGroupSelect01"
+              (change)="getCategoryType($event)"
+            >
+              <option selected disabled>...اختر</option>
+              <option value="tuktuk">التوكتوك</option>
+              <option value="motocycle">الموتسيكل</option>
+              <option value="visba">الفيسبا</option>
+              <option value="torocycle">التروسيكل</option>
+              <option value="other">الكماليات</option>
+              <option value="paint">البويات</option>
+            </select>
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >إختر الفئة</span
+            >
+          </div>
+          <div class="text-center mx-auto">
+            <button class="btn btn-outline-primary" (click)="AddBill()">
+              <i class="fa-solid fa-file-invoice me-2"></i>إدخال فاتورة
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          إغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

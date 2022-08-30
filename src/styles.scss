@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "~bootstrap-icons/font/bootstrap-icons.css";
+//  Fonts
+@import "~bootstrap/dist/css/bootstrap.css" ;
+@import "_fonts.scss";
+* {
+    font-family: "PF Din Text Universal";
+}
+
+
+/* Scrollbar Styling */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #6d6d6d;
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
